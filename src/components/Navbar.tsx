@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import logo from "../../public/logo.svg";
 import MobileNav from "./MobileNav";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 const Navbar = () => {
   return (
@@ -20,7 +21,14 @@ const Navbar = () => {
         </p>
       </Link>
       <div className="flex-between flex items-center gap-5">
-        <div>CLERK</div>
+        <div>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+          <SignedOut>
+            <SignInButton />
+          </SignedOut>
+        </div>
         <MobileNav />
       </div>
     </nav>

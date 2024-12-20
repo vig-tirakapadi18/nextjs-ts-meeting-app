@@ -17,6 +17,12 @@ export default {
         rose: {
           1: "#e11d48",
         },
+        orange: {
+          1: "#FF742E",
+        },
+        backgroundImage: {
+          hero: `url("./public/images/hero-background.png")`,
+        },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
