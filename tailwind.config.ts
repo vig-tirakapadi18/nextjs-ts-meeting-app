@@ -20,6 +20,15 @@ export default {
         orange: {
           1: "#FF742E",
         },
+        yellow: {
+          1: "#facc15",
+        },
+        purple: {
+          1: "#a855f7",
+        },
+        blue: {
+          1: "#0ea5e9",
+        },
         backgroundImage: {
           hero: `url("./public/images/hero-background.png")`,
         },
