@@ -3,7 +3,7 @@
 import { useGetCalls } from "@/hooks/useGetCalls";
 import { Call, CallRecording } from "@stream-io/video-react-sdk";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MeetingCard from "./MeetingCard";
 import {
   FaCalendarAlt,
@@ -12,8 +12,11 @@ import {
   FaVideo,
 } from "react-icons/fa";
 import Loader from "./Loader";
+import { useToast } from "@/hooks/use-toast";
 
-type CallListType = "upcoming" | "recordings";
+interface CallListType {
+  type: "upcoming" | "recordings" | "ended";
+}
 
 const CallList = ({ type }: CallListType) => {
   const [recordings, setRecordings] = useState<CallRecording[]>([]);
@@ -24,6 +27,29 @@ const CallList = ({ type }: CallListType) => {
     recordings: callRecordings,
     isLoading,
   } = useGetCalls();
+
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const fetchRecordings = async () => {
+      try {
+        const callData = await Promise.all(
+          callRecordings.map((meeting) => meeting.queryRecordings() ?? [])
+        );
+
+        const recordings = callData
+          .filter((meeting) => meeting.recordings.length > 0)
+          .flatMap((meeting) => meeting.recordings);
+
+        setRecordings(recordings);
+      } catch (error) {
+        console.log(error);
+        toast({ title: "Failed to fetch recordings, Please try again later!" });
+      }
+    };
+
+    if (type === "recordings") fetchRecordings();
+  }, [type, callRecordings]);
 
   const getCalls = () => {
     switch (type) {
@@ -72,11 +98,12 @@ const CallList = ({ type }: CallListType) => {
               )
             }
             title={
-              (meeting as Call).state.custom.description.substring(0, 26) ||
+              (meeting as Call).state?.custom.description.substring(0, 26) ||
+              (meeting as CallRecording).filename.substring(0, 20) ||
               "No Description Given!"
             }
             // date={
-            //   (meeting as Call).state.startedAt?.toLocaleString() ??
+            //   (meeting as Call).state?.startedAt?.toLocaleString() ??
             //   (meeting as CallRecording).start_time.toLocaleString()
             // }
             date="22/12/2024, 12:00:00 AM"
