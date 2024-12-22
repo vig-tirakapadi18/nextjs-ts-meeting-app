@@ -15,7 +15,7 @@ interface IMeetingParams {
 const Meeting = ({ params }: IMeetingParams) => {
   const [isSetupComplete, setIsSetupComplete] = useState<boolean>(false);
 
-  const { user, isLoaded } = useUser();
+  const { isLoaded } = useUser();
 
   const { id } = use(params);
 
