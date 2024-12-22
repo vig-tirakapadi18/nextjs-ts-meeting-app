@@ -49,7 +49,7 @@ const CallList = ({ type }: CallListType) => {
     };
 
     if (type === "recordings") fetchRecordings();
-  }, [type, callRecordings]);
+  }, [type, callRecordings, toast]);
 
   const getCalls = () => {
     switch (type) {
@@ -98,8 +98,8 @@ const CallList = ({ type }: CallListType) => {
               )
             }
             title={
-              (meeting as Call).state?.custom.description.substring(0, 26) ||
-              (meeting as CallRecording).filename.substring(0, 20) ||
+              (meeting as Call).state?.custom?.description?.substring(0, 26) ||
+              (meeting as CallRecording)?.filename?.substring(0, 20) ||
               "No Description Given!"
             }
             // date={
