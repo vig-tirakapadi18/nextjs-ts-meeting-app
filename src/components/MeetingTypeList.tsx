@@ -13,6 +13,7 @@ import { IoCopy } from "react-icons/io5";
 import { TiInputChecked } from "react-icons/ti";
 import { Textarea } from "./ui/textarea";
 import ReactDatePicker from "react-datepicker";
+import { Input } from "./ui/input";
 
 const MeetingTypeList = () => {
   const router = useRouter();
@@ -89,11 +90,11 @@ const MeetingTypeList = () => {
 
       <HomeCard
         className="bg-purple-1"
-        heading="New Meeting"
-        subTitle="Start an instant meeting"
+        heading="Join Meeting"
+        subTitle="Via invitation link"
         handleClick={() => setMeetingState("isJoiningMeeting")}
       >
-        <HiVideoCamera size={40} />
+        <HiUserAdd size={40} />
       </HomeCard>
 
       <HomeCard
@@ -102,7 +103,7 @@ const MeetingTypeList = () => {
         subTitle="Check out your recordings"
         handleClick={() => router.push("/recordings")}
       >
-        <HiUserAdd size={40} />
+        <HiVideoCamera size={40} />
       </HomeCard>
 
       {!callDetails ? (
@@ -177,6 +178,26 @@ const MeetingTypeList = () => {
         buttonText="Start Meeting"
         handleClick={createMeeting}
       />
+
+      <MeetingModal
+        isOpen={meetingState === "isJoiningMeeting"}
+        onClose={() => setMeetingState(undefined)}
+        title="Paste the link here"
+        className="text-center"
+        buttonText="Join Meeting"
+        handleClick={() => router.push(values.link)}
+      >
+        <Input
+          placeholder="Meeting Link"
+          className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+          onChange={(event) =>
+            setValues((prevValues) => ({
+              ...prevValues,
+              link: event.target.value,
+            }))
+          }
+        />
+      </MeetingModal>
     </section>
   );
 };
