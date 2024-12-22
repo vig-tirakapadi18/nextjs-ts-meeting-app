@@ -11,8 +11,10 @@ export default {
     extend: {
       colors: {
         dark: {
-          1: "#1c1f2e",
+          1: "#1C1F2E",
           2: "#161925",
+          3: "#252A41",
+          4: "#1E2757",
         },
         rose: {
           1: "#e11d48",
@@ -28,6 +30,11 @@ export default {
         },
         blue: {
           1: "#0ea5e9",
+        },
+        sky: {
+          1: "#C9DDFF",
+          2: "#ECF0FF",
+          3: "#F5FCFF",
         },
         backgroundImage: {
           hero: `url("./public/images/hero-background.png")`,

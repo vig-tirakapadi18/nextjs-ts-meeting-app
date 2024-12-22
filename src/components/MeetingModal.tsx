@@ -14,6 +14,7 @@ interface IMeetingModalProps {
   buttonText?: string;
   buttonIcon?: ReactNode;
   image?: string;
+  buttonImageIcon?: ReactNode;
 }
 
 const MeetingModal = ({
@@ -26,6 +27,7 @@ const MeetingModal = ({
   buttonText,
   buttonIcon,
   image,
+  buttonImageIcon,
 }: IMeetingModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -33,7 +35,10 @@ const MeetingModal = ({
         <div className="flex flex-col gap-6">
           {image && (
             <div className="flex justify-center">
-              <Image src={image} alt="image" width={72} height={72} />
+              {image && (
+                <Image src={image} alt="image" width={72} height={72} />
+              )}
+              {buttonImageIcon}
             </div>
           )}
           <h1 className={cn("text-3xl font-bold leading-[42px]", className)}>
