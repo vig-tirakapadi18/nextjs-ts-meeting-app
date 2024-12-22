@@ -1,7 +1,13 @@
 import { ILayoutProps } from "@/app/types";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
+import { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Voom",
+  description: "Voom, The video conferencing app!",
+};
 
 const HomeLayout = ({ children }: ILayoutProps) => {
   return (

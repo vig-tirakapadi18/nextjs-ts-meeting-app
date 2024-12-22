@@ -5,6 +5,7 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { IoMenu } from "react-icons/io5";
@@ -24,6 +25,7 @@ const MobileNav = () => {
           <IoMenu size={36} color="#ffffff" className="cursor-pointer" />
         </SheetTrigger>
         <SheetContent side="left" className="border-none bg-dark-1">
+          <SheetTitle className="hidden">Title</SheetTitle>
           <Link href="/" className="flex items-center gap-1">
             <Image
               src={logo}
